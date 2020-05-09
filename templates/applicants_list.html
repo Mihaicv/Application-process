@@ -1,0 +1,59 @@
+
+{#<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">#}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title >List applicants</title>
+</head>
+<div style="background: #008e9d " >
+<body>
+    <h2 style="text-decoration-line: underline" >List applicants</h2>
+    <table class="table">
+        <tr>
+            <td><h4>Full name</h4></td>
+            <td><h4>Phone</h4></td>
+            <td><h4>Email</h4></td>
+            <td><h4>Application Code</h4></td>
+        </tr>
+        <tr>
+        {% for applicant in applicants_list %}
+            <td><a href="/applicants/{{applicant.application_code}}">{{ applicant.first_name + ' ' + applicant.last_name }}<br> <button type="button"><a href="/applicants/{{applicant.application_code}}/delete">Delete applicant</a> </button></td>
+            <td>{{applicant.phone_number}}</td>
+            <td>{{applicant.email}}</td>
+            <td>{{ applicant.application_code }}</td>
+        </tr>
+         {% endfor %}
+    </table><br><br>
+    <form action="/applicants/delete_by_mail" method="POST">
+        <label for="email-ending">Delete by email-ending:</label>
+        <input id="email-ending" type="text" name="email-ending">
+        <button type="submit">Delete</button>
+    </form><br><br>
+
+    <div style="background: grey" align="center">
+    <h4>Add new applicant:</h4>
+    <form action="/add-applicant" method="POST">
+        <div class="container">
+        <div class="form-group">
+            <label for="first_name">First name:</label>
+            <input id="first_name" type="text" name="first_name">
+            <label for="last_name">Last name:</label>
+            <input id="last_name" type="text" name="last_name">
+            <label for="phone_number">Phone:</label>
+            <input id="phone_number" type="text" name="phone_number">
+            <label for="e_mail">E-mail:</label>
+            <input id="e_mail" type="text" name="e_mail">
+            <button type="submit">Send</button>
+        </div>
+        </div>
+    </form>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</div>
+</html>
+

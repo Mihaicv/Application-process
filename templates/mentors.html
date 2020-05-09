@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+    Mentors list
+{% endblock %}
+
+{% block content %}
+    <div>
+        <form action="/mentors">
+            <label for="name-input">Filter by mentor last name:</label>
+            <input id="name-input" type="text" name="mentor-last-name">
+
+            <label for="city-name">Filter by city:</label>
+            <select id="city-name" name="city-name">
+                <option value="Bucharest">Bucharest</option>
+                 <option value="Budapest">Budapest</option>
+                <option value="Kraków">Kraków</option>
+                <option value="Miskolc">Miskolc</option>
+                 <option value="Warsaw">Warsaw</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div id="mentors">
+        {% for mentor in mentors %}
+            {{ mentor.first_name + " " + mentor.last_name }} - {{ mentor.city }}<br>
+        {% endfor %}
+    </div>
+
+
+
+    {% include 'footer.html' %}
+{% endblock %}

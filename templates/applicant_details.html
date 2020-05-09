@@ -1,0 +1,23 @@
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Applicant details</title>
+</head>
+<body>
+        <br><h2>Applicant details</h2>
+        {% for a in applicant%}
+            {{ 'Name: '+a.first_name + " " + a.last_name+" - phone number "+a.phone_number+", "+a.email}}<br><br>
+         <form action="/applicants/{{a.application_code}}" method="POST">
+              <label for="new_phone">Update phone</label>
+              <input id="new_phone" type="text" name="new_phone" value="{{a.phone_number}}"><button type="submit">Send update</button><br><br>
+         </form>
+        {% endfor %}<br>
+
+        {% include 'footer.html' %}
+</body>
+</html>

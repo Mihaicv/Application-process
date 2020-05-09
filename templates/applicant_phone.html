@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find applicants by name or email</title>
+</head>
+<body>
+    <h3>Applicants</h3>
+    <div id="applicant">
+        {% for appli in applicant %}
+            {{'Name:'+ appli.first_name + " " + appli.last_name +", Phone number: "+ appli.phone_number}}<br>
+        {% endfor %}
+     {% include 'footer.html' %}
+
+</html>
